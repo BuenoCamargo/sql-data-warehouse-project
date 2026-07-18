@@ -1,3 +1,21 @@
+/*
+===============================================================================
+Stored Procedure: Carga da Camada Bronze (Origem -> Bronze)
+===============================================================================
+Objetivo do Script:
+    Esta stored procedure carrega dados no esquema 'bronze' a partir de arquivos CSV externos. 
+    Ela executa as seguintes ações:
+    - Executa o TRUNCATE nas tabelas bronze antes de carregar os dados.
+    - Usa o comando `BULK INSERT` para carregar os dados dos arquivos CSV para as tabelas bronze.
+
+Parâmetros:
+    Nenhum. 
+    Esta stored procedure não aceita parâmetros e não retorna valores.
+
+Exemplo de Uso:
+    EXEC bronze.load_bronze;
+===============================================================================
+*/
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
