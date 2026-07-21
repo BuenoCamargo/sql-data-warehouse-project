@@ -9,7 +9,8 @@ Este projeto demonstra uma solução abrangente de data warehousing e analytics,
 ## 🏗️ Arquitetura de Dados
 
 A arquitetura de dados deste projeto segue as camadas Bronze, Silver e Gold da **Arquitetura Medalhão (Medallion Architecture)**:
-<img width="907" height="434" alt="arquiteturadedadosDWH" src="https://github.com/user-attachments/assets/d7a0df4e-7437-4841-8772-ebb02aac8e28" />
+<img width="1547" height="803" alt="arquiteturadedadosDWH" src="https://github.com/user-attachments/assets/db474cbc-a6d0-4b70-b4df-cc4312631ad6" />
+
 
 *   **Camada Bronze:** Armazena os dados brutos exatamente como vêm dos sistemas de origem. Os dados são ingeridos a partir de arquivos CSV para o banco de dados SQL Server.
 *   **Camada Silver:** Esta camada inclui processos de limpeza, padronização e normalização de dados para prepará-los para análise.
