@@ -90,8 +90,8 @@ BEGIN
 		)
 		SELECT
 			prd_id,
-			REPLACE(SUBSTRING(prd_key, 1, 5), '-', '_') AS cat_id, -- Extrai o ID da categoria
-			SUBSTRING(prd_key, 7, LEN(prd_key)) AS prd_key,        -- Extrai a chave do produto
+			REPLACE(SUBSTRING(prd_key, 1, 5), '-', '_') AS cat_id,
+			SUBSTRING(prd_key, 7, LEN(prd_key)) AS prd_key,
 			prd_nm,
 			ISNULL(prd_cost, 0) AS prd_cost,
 			CASE 
@@ -100,12 +100,9 @@ BEGIN
 				WHEN UPPER(TRIM(prd_line)) = 'S' THEN 'Other Sales'
 				WHEN UPPER(TRIM(prd_line)) = 'T' THEN 'Touring'
 				ELSE 'n/a'
-			END AS prd_line, -- Mapeia códigos de linha de produtos para valores descritivos
-			CAST(prd_start_dt AS DATE) AS prd_start_dt,
-			CAST(
-				LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt) - 1 
-				AS DATE
-			) AS prd_end_dt -- Calcula a data final como um dia antes da próxima data de início
+			END AS prd_line,
+			prd_start_dt,
+			DATEADD(DAY, -1, LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)) AS prd_end_dt
 		FROM bronze.crm_prd_info;
         SET @end_time = GETDATE();
         PRINT '>> Duração da Carga: ' + CAST(DATEDIFF(SECOND, @start_time, @end_time) AS NVARCHAR) + ' segundos';
